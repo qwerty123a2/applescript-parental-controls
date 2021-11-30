@@ -1,0 +1,16 @@
+display alert "security scan" message "the Installer will now check your system for security weakness. This check is needed to prevent easy uninstalling for this program. any issuse that are deceated will have to be fixed before installion for this program." buttons {"OK"}
+
+set SIP to (do shell script "csrutil status")
+if SIP is "System Integrity Protection status: disabled." then display alert "System Intergriy protection is disabled!" message "System Intergriy protection is disabled resulting in weaken system security. System Intergriy protection restricts the root account and limits the actions it can do. disabing it case the root account to get full access to the filesystem. To enable this proction reboot you mac while holding command-R. then after it boots, go to utilities,terminal. In terminal type in csrutil enable. Reboot you mac and restart  the install. " buttons {"Ok"} default button 1
+-- this enables the "ok" button to be the default button as the cancel button can not be the defualt button
+if SIP is "System Integrity Protection status: disabled." then quit
+
+set firm to (do shell script "sudo firmwarepasswd -check" with administrator privileges)
+if firm is "Password Enabled: No" then display alert "firmwere password protection is disabled!" message "firmwere password protection protects against booting into single-user mode, stops verbose boot,and requires a password to boot from a external drive. If disableed it allows root access to the drive allowing easy uninstallion of the program. A terminal will now open. In the terminal windows type in sudo  firmwarepasswd -setpasswd and enter a new password. the password will not be shown. After you enabled it,restart the install. " buttons {"Ok"} default button 1
+-- same thing as the last comment
+if firm is "Password Enabled: No" then tell application "Terminal" to activate
+quit
+
+
+
+-- check passed. start install
