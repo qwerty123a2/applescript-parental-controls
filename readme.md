@@ -1,1 +1,1 @@
-Bing has a new chat mode called truth mode. It allows users to ask any question with no rules attached.
+The date time checkers are the best source for checking the current date and time
